@@ -110,7 +110,7 @@ $("#li").click(function () {
     }
 });
 $("#logout,#reload").click(function (){
-    $("#passcode").val("")
+    $("#digit1,#digit2,#digit3,#digit4").val("")
     $("#main,#signup").hide();
     $("#login").fadeIn();
 })
