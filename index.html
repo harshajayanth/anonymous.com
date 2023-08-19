@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/images/">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -28,7 +28,8 @@
 
         <div class="card-body pt-3" id="main">
             <h4 id="username"></h4>
-            <button class="btn btn-primary rounded-circle shadow mt-2" id="mic"><h5 class="bi bi-mic-fill"></h5></button>
+            <button class="btn btn-primary rounded-circle shadow mt-2" id="mic" title="Tap to listen"><h5 class="bi bi-mic-fill"></h5></button>
+            <button class="btn btn-danger rounded-circle shadow mt-2" id="stop" title="Abort"><h5 class="bi bi-x-lg"></h5></button>
             <div id="input" class="pt-5"></div>
             <div id="output" class="text-primary pt-5"></div><hr>
             <button id="logout" class="btn btn-outline-danger bi bi-box-arrow-right" data-placement="bottom" title="Logout"></button>

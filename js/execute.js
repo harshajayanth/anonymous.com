@@ -8,6 +8,7 @@ function execute(command) {
     }
     else if(command.includes('who are you')){
         talk('I am Anonymous. Your Voice assistant');
+        $("#output").text("I am Anonymous.")
     }
     else if(command.includes('my name'||'what is my name')){
         const username=$("#username").text();
@@ -30,7 +31,7 @@ function execute(command) {
             $("#output").text(currenttime)
         }
     }
-    else if(command.includes("spotify"||"youtube"||"google")){
+    else if(command.includes(command.includes("spotify") || command.includes("twitter") || command.includes("google")||command.includes("youtube")||command.includes("whatsapp"))||command.includes("instagram")){
         const urlinput = command.replace('open', '').trim();
         url="https://"+urlinput+".com";
         talk('Opening'+urlinput)
@@ -46,12 +47,12 @@ function execute(command) {
         location.reload()
     }
     else if(command.includes("open")){
-        const urlinput=command.replace("open","").trim();
-        url="https://"+urlinput+"com"
+        const urlinput=command.replace(/open|\.+/g,'').trim();
+        url="https://"+urlinput+".com"
         talk("Opening"+urlinput)
         window.open(url)
     }
-    else if(command.includes("what"||"who"||"how"))
+    else if(command.includes("what") || command.includes("who") || command.includes("how"))
     {
         const wikipediaApiUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${encodeURIComponent(command)}`;
 
@@ -63,11 +64,13 @@ function execute(command) {
                 const searchResults = data.query.search;
                 let resultHtml = "";
 
-                searchResults.forEach(function (result) {
-                    resultHtml +=result.title+result.snippet;
-                });
-                $("#output").html(resultHtml);
-                talk(resultHtml);
+                    const result = searchResults[1];
+                    resultHtml += result.snippet;
+
+                const lines = resultHtml.split('\n');
+                const firstFiveLines = lines.slice(0,5).join('\n');
+                $("#output").html(firstFiveLines);
+                talk(firstFiveLines);
             },
             error: function (error) {
                 talk("Error fetching Wikipedia content:");

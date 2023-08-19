@@ -1,17 +1,30 @@
 $(document).ready(function (){
 
-    $("#main,#signup").hide();
+    $("#main,#signup,#stop").hide();
 
     const recognition = new webkitSpeechRecognition(); // Create a SpeechRecognition object
-    const audioname=new Audio("tone.wav");
+    function play(tone){
+        const audioname=new Audio(tone);
+        audioname.play();
+    }
 
     $("#mic").click(function (){
-        $(this).addClass("animate__animated animate__heartBeat")
-        audioname.play();
+        $("#mic").hide();
+        $("#stop").show();
+        $("#stop").addClass("animate__animated animate__heartBeat")
+        play("tone.wav")
         recognition.start();
         $("#input").text("Listening...");
     })
 
+    $("#stop").click(function (){
+        $("#stop").hide();
+        $("#mic").fadeIn();
+        $("#mic").addClass("animate__animated animate__heartBeat")
+        speechSynthesis.cancel();
+        play("stop.mp3")
+        $("#input,#output").text("");
+    })
     recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript;
         const text=transcript.toLowerCase();
@@ -36,7 +49,6 @@ function talk(text){
     utterance.rate = 1;  // Speed of speech
     utterance.pitch = 1; // Pitch of speech
     speechSynthesis.speak(utterance);
-
 }
 // Define the logins object outside the event handlers
 const logins = {
