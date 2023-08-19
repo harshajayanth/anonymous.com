@@ -22,7 +22,7 @@ $(document).ready(function (){
         $("#mic").fadeIn();
         $("#mic").addClass("animate__animated animate__heartBeat")
         speechSynthesis.cancel();
-        recognition.abort()
+        recognition.stop()
         play("stop.mp3")
         $("#input,#output").text("");
     })
