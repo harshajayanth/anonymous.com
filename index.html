@@ -19,8 +19,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="bg-dark">
-<div class="align-items-center justify-content-center d-flex mt-5">
-    <div id="shell" class="card bg-light text-center col-lg-3 col-sm-3 col-md-3 rounded shadow-1 border-success" style="min-height: 40vh">
+<div class="container align-items-center justify-content-center d-flex mt-5">
+    <div id="shell" class="card bg-light text-center col-lg-4 col-sm-4 col-md-4 rounded shadow-1 border-success" style="min-height: 40vh">
         <div class="card-header navbar nav text-success pt-3">
             <h3>Anonymous</h3>
             <h3 class="justify-content-end bi bi-mic-fill text-dark" id="navicon"></h3>
@@ -31,6 +31,13 @@
             <button class="btn btn-primary rounded-circle shadow mt-2" id="mic" title="Tap to listen"><h5 class="bi bi-mic-fill"></h5></button>
             <button class="btn btn-danger rounded-circle shadow mt-2" id="stop" title="Abort"><h5 class="bi bi-x-lg"></h5></button>
             <div id="input" class="pt-5"></div>
+            <div class="sound" id="waveanimate">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
             <div id="output" class="text-primary pt-5"></div><hr>
             <button id="logout" class="btn btn-outline-danger bi bi-box-arrow-right" data-placement="bottom" title="Logout"></button>
         </div>
@@ -70,10 +77,10 @@
 
 
 </div>
-<footer class="bg-light mt-5">
+</body>
+<footer class="text-white mt-5">
     <p class="text-center">&copy; 2023 Developed By Harsha Jayanth. All Rights Reserved.</p>
 </footer>
-</body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/popper.js"></script>

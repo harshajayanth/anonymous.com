@@ -1,6 +1,6 @@
 $(document).ready(function (){
 
-    $("#main,#signup,#stop").hide();
+    $("#main,#signup,#stop,#waveanimate").hide();
 
     const recognition = new webkitSpeechRecognition(); // Create a SpeechRecognition object
     function play(tone){
@@ -14,15 +14,17 @@ $(document).ready(function (){
         $("#stop").addClass("animate__animated animate__heartBeat")
         play("tone.wav")
         recognition.start();
+        $("#waveanimate").fadeIn();
         $("#input").text("Listening...");
     })
 
     $("#stop").click(function (){
         $("#stop").hide();
         $("#mic").fadeIn();
-        $("#mic").addClass("animate__animated animate__heartBeat")
+        $("#mic").addClass("animate__animated animate__pulse")
         speechSynthesis.cancel();
         recognition.stop()
+        $("#waveanimate").hide();
         play("stop.mp3")
         $("#input,#output").text("");
     })
@@ -50,6 +52,12 @@ function talk(text){
     utterance.rate = 1;  // Speed of speech
     utterance.pitch = 1; // Pitch of speech
     speechSynthesis.speak(utterance);
+    $("#waveanimate").hide();
+
+    utterance.onend = function() {
+        $("#stop").hide();
+        $("#mic").fadeIn();
+    };
 }
 // Define the logins object outside the event handlers
 const logins = {
@@ -99,7 +107,7 @@ $("#li").click(function () {
             $("#login").hide();
             talk("Welcome!" + name);
             $("#username").text("Hey, " + name);
-            return name;
+            $("#input").text("Welcome " + name);
         } else {
             $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
             talk("User Not found");

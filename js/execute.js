@@ -52,7 +52,7 @@ function execute(command) {
         talk("Opening"+urlinput)
         window.open(url)
     }
-    else if(command.includes("what") || command.includes("who") || command.includes("how"))
+    else if(command.includes("what") || command.includes("who")||command.includes("search") || command.includes("how"))
     {
         const wikipediaApiUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${encodeURIComponent(command)}`;
 
@@ -66,8 +66,8 @@ function execute(command) {
 
                     const result = searchResults[1];
                     resultHtml += result.snippet;
-
-                const lines = resultHtml.split('\n');
+                const cleanedContent = resultHtml.replace(/<\/?span[^>]*>/g, '');
+                const lines = cleanedContent.split('\n');
                 const firstFiveLines = lines.slice(0,5).join('\n');
                 $("#output").html(firstFiveLines);
                 talk(firstFiveLines);
