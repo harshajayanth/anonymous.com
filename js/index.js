@@ -24,7 +24,7 @@ $(document).ready(function (){
                 $("#stop").hide();
                 $("#mic").fadeIn();
                 $("#input").text("Command...");
-            }, 7000)
+            }, 6000)
         }
     })
 
