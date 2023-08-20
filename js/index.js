@@ -1,34 +1,39 @@
-$(document).ready(function (){
+$(document).ready(function () {
 
     $("#main,#signup,#stop,#waveanimate").hide();
+    const history=[]
 
     const recognition = new webkitSpeechRecognition(); // Create a SpeechRecognition object
-    function play(tone){
-        const audioname=new Audio(tone);
+    function play(tone) {
+        const audioname = new Audio(tone);
         audioname.play();
     }
 
-    $("#mic").click(function (){
+    $("#mic").click(function () {
         $("#mic").hide();
         $("#stop").show();
         $("#stop").addClass("animate__animated animate__heartBeat")
         play("tone.wav")
         recognition.start();
+        $("#output").text("");
         $("#waveanimate").fadeIn();
         $("#input").text("Listening...");
-        if($("#input").text()==="Listening..."){
             setTimeout(() => {
-                recognition.stop()
-                $("#waveanimate").hide();
-                play("stop.mp3")
-                $("#stop").hide();
-                $("#mic").fadeIn();
-                $("#input").text("Command...");
-            }, 6000)
-        }
+                if ($("#input").text()=== "Listening...")
+                    Timeout();
+            }, 7000)
     })
 
-    $("#stop").click(function (){
+    function Timeout() {
+        $("#waveanimate").hide();
+        $("#output").text("Command...");
+        $("#input").text("");
+        talk("command")
+        $("#stop").hide();
+        $("#mic").fadeIn();
+    }
+
+    $("#stop").click(function () {
         $("#stop").hide();
         $("#mic").fadeIn();
         $("#mic").addClass("animate__animated animate__pulse")
@@ -38,23 +43,52 @@ $(document).ready(function (){
         play("stop.mp3")
         $("#input,#output").text("");
     })
-    recognition.onresult = function(event) {
+    recognition.onresult = function (event) {
         const transcript = event.results[0][0].transcript;
-        const text=transcript.toLowerCase();
+        const text = transcript.toLowerCase();
         $("#input").text(transcript);
-        // Call your existing hey_spidey() function with the recognized command
+        let time=new Date()
+        let object={search:transcript,timestamp:time.getHours()+" : "+time.getMinutes()}
+        history.push(object);
         execute(text);
     };
 
-    recognition.onend = function() {
+    recognition.onend = function () {
         $("#mic").removeClass("animate__animated animate__heartBeat")
         recognition.stop();
     };
 
     checkScreenResolution()
+
+    //History
+    function historycall(clear){
+        if(history.length!==0) {
+            let output = ""
+            for (let i = 0; i < history.length; i++) {
+                        output += "<div class='container row'><h5 class='text-dark col-9 font-weight-bold'>" + history[i].search+ "</h5>"+
+                            "<p class='text-muted col-3 justify-content-end align-items-end'>"+history[i].timestamp+"</p></div><hr>"
+            }
+            $("#historybody").html(output)
+        }
+        else {
+            $("#historybody").html("<h3 class='text-secondary text-center'>No History</h3>")
+        }
+    }
+
+    $("#seehistory").click(function (){
+        historycall(history);
+    })
+    $("#clearhistory").click(function (){
+        let confirmed=confirm("Clear History Data?")
+        if(confirmed){
+            history.length=0
+            historycall(history)
+        }
+    })
+
 })
 
-function talk(text){
+function talk(text) {
     const utterance = new SpeechSynthesisUtterance(); //Text to speech Object
     utterance.text = text;
     // Optional: Set properties like voice, rate, pitch, etc.
@@ -64,11 +98,12 @@ function talk(text){
     speechSynthesis.speak(utterance);
     $("#waveanimate").hide();
 
-    utterance.onend = function() {
+    utterance.onend = function () {
         $("#stop").hide();
         $("#mic").fadeIn();
     };
 }
+
 // Define the logins object outside the event handlers
 const logins = {
     "an01": ["Harsha"],
@@ -81,22 +116,18 @@ $("#create").click(function () {
     let newdigit2 = $("#newdigit2").val();
     let newdigit3 = $("#newdigit3").val();
     let newdigit4 = $("#newdigit4").val();
-    let newpass=newdigit1+newdigit2+newdigit3+newdigit4;
-    if(newname!==""&&newpass!=="")
-    {
-        if(newpass in logins){
-             talk("PassCode is already taken!Enter another Passcode")
-        }
-        else{
+    let newpass = newdigit1 + newdigit2 + newdigit3 + newdigit4;
+    if (newname !== "" && newpass !== "") {
+        if (newpass in logins) {
+            talk("PassCode is already taken!Enter another Passcode")
+        } else {
             talk("Profile Created successfully!")
             logins[newpass] = [newname];
             $("#passcode").val("");
             $("#main, #signup").hide();
             $("#login").fadeIn();
         }
-    }
-    else
-    {
+    } else {
         talk("Please Fill the fields")
     }
 });
@@ -107,8 +138,8 @@ $("#li").click(function () {
     let digit2 = $("#digit2").val();
     let digit3 = $("#digit3").val();
     let digit4 = $("#digit4").val();
-    if (digit1!==""&&digit2!==""&&digit3!==""&&digit4!=="") {
-        let pass = digit1+digit2+digit3+digit4
+    if (digit1 !== "" && digit2 !== "" && digit3 !== "" && digit4 !== "") {
+        let pass = digit1 + digit2 + digit3 + digit4
         if (pass in logins) {
             const name = logins[pass][0];
             $("#main").fadeIn();
@@ -123,20 +154,19 @@ $("#li").click(function () {
             $("#digit1,#digit2,#digit3,#digit4").val("");
             talk("User Not found");
         }
-    }
-    else{
+    } else {
         $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
         $("#digit1,#digit2,#digit3,#digit4").val("");
         talk("Please Enter Passcode")
     }
 });
-$("#logout,#reload").click(function (){
+$("#logout,#reload").click(function () {
     $("#digit1,#digit2,#digit3,#digit4").val("")
     $("#main,#signup").hide();
     $("#login").fadeIn();
 })
 
-$("#su").click(function (){
+$("#su").click(function () {
     $("#main,#login").hide();
     $("#signup").fadeIn();
 })
@@ -152,6 +182,7 @@ function checkScreenResolution() {
         }
     }
 }
+
 const digitInputs = document.querySelectorAll('.digit-input');
 
 digitInputs.forEach((input, index) => {
@@ -160,8 +191,7 @@ digitInputs.forEach((input, index) => {
             if (index < digitInputs.length - 1) {
                 digitInputs[index + 1].focus();
             }
-        }
-        else{
+        } else {
             digitInputs[index - 1].focus();
         }
     });

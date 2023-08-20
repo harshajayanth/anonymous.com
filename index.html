@@ -39,7 +39,10 @@
                 <div class="wave"></div>
             </div>
             <div id="output" class="text-primary pt-5"></div><hr>
-            <button id="logout" class="btn btn-outline-danger bi bi-box-arrow-right" data-placement="bottom" title="Logout"></button>
+            <div class="container row">
+            <button id="logout" class="btn btn-danger bi bi-box-arrow-right" data-placement="bottom" title="Logout"></button>
+            <a href="#" id="seehistory" class="nav-link"data-bs-toggle="modal" data-bs-target="#history">History</a>
+            </div>
         </div>
 
         <div class="card-body pt-3" id="login">
@@ -78,6 +81,22 @@
 
 </div>
 </body>
+
+<!--History Modal -->
+<div class="modal fade" id="history" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h1 class="modal-title" id="exampleModalLabel">History</h1>
+            </div>
+            <div class="modal-body" id="historybody"></div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" id="historyclose" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="clearhistory">Clear History</button>
+            </div>
+        </div>
+    </div>
+</div>
 <footer class="text-white mt-5">
     <p class="text-center">&copy; 2023 Developed By Harsha Jayanth. All Rights Reserved.</p>
 </footer>

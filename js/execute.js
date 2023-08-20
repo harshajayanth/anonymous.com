@@ -1,5 +1,7 @@
 
-function execute(command) {
+function execute(query) {
+    $("#output").text("")
+    let command=query.replace("\.","");
     if(command.includes('play')){
         const song = command.replace('play', '');
         talk('Playing ' + song);
@@ -11,7 +13,7 @@ function execute(command) {
         $("#output").text("I am Anonymous.")
     }
     else if(command.includes('hi')||command.includes('hello')){
-        talk(command+'Command me!I am at your service');
+        talk(command);
         $("#output").text(command)
     }
     else if(command.includes('what is my name')){
@@ -56,6 +58,9 @@ function execute(command) {
         talk("Opening"+urlinput)
         window.open(url)
     }
+    else if(command.includes("update")&&(command.includes("passcode")||command.includes("password"))){
+        talk("Go to login page!Update your passcode with same username!Your passcode will be updated!")
+    }
     else if(command.includes("what") || command.includes("who")||command.includes("search") || command.includes("how"))
     {
         const wikipediaApiUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${encodeURIComponent(command)}`;
@@ -82,7 +87,7 @@ function execute(command) {
         })
     }
     else{
-        $("#output").text("Speak something!")
+        $("#output").html("<img src='sad.jpeg' width='50' height='50' class='img-fluid'>")
         talk("Sorry!I am unavailable to this service");
     }
 }
