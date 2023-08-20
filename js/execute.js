@@ -6,11 +6,15 @@ function execute(command) {
         url="https://www.youtube.com/results?search_query="+song;
         window.open(url)
     }
-    else if(command.includes('who are you')){
+    else if(command.includes('who are you')||command.includes('what is your name')||command.includes('your name')){
         talk('I am Anonymous. Your Voice assistant');
         $("#output").text("I am Anonymous.")
     }
-    else if(command.includes('my name'||'what is my name')){
+    else if(command.includes('hi')||command.includes('hello')){
+        talk(command+'Command me!I am at your service');
+        $("#output").text(command)
+    }
+    else if(command.includes('what is my name')){
         const username=$("#username").text();
         const name=username.replace("Hey,","").trim();
         talk(name)

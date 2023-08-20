@@ -16,6 +16,16 @@ $(document).ready(function (){
         recognition.start();
         $("#waveanimate").fadeIn();
         $("#input").text("Listening...");
+        if($("#input").text()==="Listening..."){
+            setTimeout(() => {
+                recognition.stop()
+                $("#waveanimate").hide();
+                play("stop.mp3")
+                $("#stop").hide();
+                $("#mic").fadeIn();
+                $("#input").text("Command...");
+            }, 6000)
+        }
     })
 
     $("#stop").click(function (){
@@ -110,11 +120,13 @@ $("#li").click(function () {
             $("#input").text("Welcome " + name);
         } else {
             $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
+            $("#digit1,#digit2,#digit3,#digit4").val("");
             talk("User Not found");
         }
     }
     else{
         $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
+        $("#digit1,#digit2,#digit3,#digit4").val("");
         talk("Please Enter Passcode")
     }
 });
