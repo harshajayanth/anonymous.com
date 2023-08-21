@@ -65,8 +65,8 @@ $(document).ready(function () {
         if(history.length!==0) {
             let output = ""
             for (let i = 0; i < history.length; i++) {
-                        output += "<div class='container row'><h5 class='text-dark col-9 font-weight-bold'>" + history[i].search+ "</h5>"+
-                            "<p class='text-muted col-3 justify-content-end align-items-end'>"+history[i].timestamp+"</p></div><hr>"
+                        output += "<div class='container row'><h5 class='text-dark col-10 font-weight-bold'>" + history[i].search+ "</h5>"+
+                            "<p class='text-muted col-2 justify-content-end align-items-end'>"+history[i].timestamp+"</p></div><hr>"
             }
             $("#historybody").html(output)
         }
