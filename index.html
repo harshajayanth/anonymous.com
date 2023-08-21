@@ -20,7 +20,8 @@
 </head>
 <body class="bg-dark">
 <div class="container align-items-center justify-content-center d-flex mt-5">
-    <div id="shell" class="card bg-light text-center col-lg-4 col-sm-4 col-md-4 rounded shadow-1 border-success" style="min-height: 40vh">
+    <div id="shell" class="card bg-light text-center col-lg-4 col-sm-4 col-md-4 rounded shadow-1 border-success"
+         style="min-height: 40vh">
         <div class="card-header navbar nav text-success pt-3">
             <h3>Anonymous</h3>
             <h3 class="justify-content-end bi bi-mic-fill text-dark" id="navicon"></h3>
@@ -28,8 +29,10 @@
 
         <div class="card-body pt-3" id="main">
             <h4 id="username"></h4>
-            <button class="btn btn-primary rounded-circle shadow mt-2" id="mic" title="Tap to listen"><h5 class="bi bi-mic-fill"></h5></button>
-            <button class="btn btn-danger rounded-circle shadow mt-2" id="stop" title="Abort"><h5 class="bi bi-x-lg"></h5></button>
+            <button class="btn btn-primary rounded-circle shadow mt-2" id="mic" title="Tap to listen"><h5
+                    class="bi bi-mic-fill"></h5></button>
+            <button class="btn btn-danger rounded-circle shadow mt-2" id="stop" title="Abort"><h5
+                    class="bi bi-x-lg"></h5></button>
             <div id="input" class="pt-5"></div>
             <div class="sound" id="waveanimate">
                 <div class="wave"></div>
@@ -38,10 +41,14 @@
                 <div class="wave"></div>
                 <div class="wave"></div>
             </div>
-            <div id="output" class="text-primary pt-5"></div><hr>
-            <div class="container row">
-            <button id="logout" class="btn btn-danger bi bi-box-arrow-right" data-placement="bottom" title="Logout"></button>
-            <a href="#" id="seehistory" class="nav-link"data-bs-toggle="modal" data-bs-target="#history">History</a>
+            <div id="output" class="text-primary pt-5"></div>
+            <hr>
+            <div class="container-fluid row">
+                <button id="logout" class="btn btn-danger bi bi-box-arrow-right justify-content-start"
+                        data-placement="bottom"
+                        title="Logout"></button>
+                <a href="#" id="seehistory" class="nav-link" data-bs-toggle="modal"
+                   data-bs-target="#history">History</a>
             </div>
         </div>
 
@@ -49,36 +56,16 @@
             <h3 class="mb-3">Login</h3>
             <div class="container mb-3">
                 <div class="row d-flex text-center justify-content-center align-items-center">
-                        <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="digit1" maxlength="1" pattern="\d" required>
-                        <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="digit2" maxlength="1" pattern="\d" required>
-                        <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="digit3" maxlength="1" pattern="\d" required>
-                        <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="digit4" maxlength="1" pattern="\d" required>
+                    <input type="text" class="form-control border-primary text-center font-weight-bold"
+                           placeholder="Enter your name" id="name" required>
                 </div>
             </div>
             <div class="container">
-            <button class="btn btn-success mt-3" type="submit" id="li">Login</button>
-            <button class="btn btn-warning mt-3" id="su">Sign Up</button>
+                <button class="btn btn-success mt-3" type="submit" id="li">Login</button>
             </div>
         </div>
 
-        <div class="card-body pt-3" id="signup">
-            <h3>SignUp</h3>
-            <input class="form-control border-success mt-3 font-weight-bold" id="newname" placeholder="Enter Your Name" required>
-            <div class="container mt-3">
-                <div class="row d-flex text-center justify-content-center align-items-center">
-                    <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="newdigit1" maxlength="1" pattern="\d" required>
-                    <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="newdigit2" maxlength="1" pattern="\d" required>
-                    <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="newdigit3" maxlength="1" pattern="\d" required>
-                    <input type="password" class="col-2 ml-2 form-control border-primary digit-input" id="newdigit4" maxlength="1" pattern="\d" required>
-                </div>
-            </div>
-            <button class="btn btn-warning mt-3" id="create">Create</button>
-            <a href="#" id="reload" class="nav-link">Sign In</a>
-        </div>
-        <p class="text-center text-muted mt-4">Anonymous is a Voice Assistant developed using Javascript</p>
     </div>
-
-
 </div>
 </body>
 

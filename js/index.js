@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#main,#signup,#stop,#waveanimate").hide();
+    $("#main,#stop,#waveanimate").hide();
     const history=[]
 
     const recognition = new webkitSpeechRecognition(); // Create a SpeechRecognition object
@@ -65,8 +65,8 @@ $(document).ready(function () {
         if(history.length!==0) {
             let output = ""
             for (let i = 0; i < history.length; i++) {
-                        output += "<div class='container row'><h5 class='text-dark col-10 font-weight-bold'>" + history[i].search+ "</h5>"+
-                            "<p class='text-muted col-2 justify-content-end align-items-end'>"+history[i].timestamp+"</p></div><hr>"
+                        output += "<div class='container row'><h5 class='text-dark col-9 font-weight-bold'>" + history[i].search+ "</h5>"+
+                            "<p class='text-primary col-3 justify-content-end align-items-end'>"+history[i].timestamp+"</p></div><hr>"
             }
             $("#historybody").html(output)
         }
@@ -110,65 +110,27 @@ const logins = {
     "an02": ["Sandeep"]
 };
 
-$("#create").click(function () {
-    let newname = $("#newname").val();
-    let newdigit1 = $("#newdigit1").val();
-    let newdigit2 = $("#newdigit2").val();
-    let newdigit3 = $("#newdigit3").val();
-    let newdigit4 = $("#newdigit4").val();
-    let newpass = newdigit1 + newdigit2 + newdigit3 + newdigit4;
-    if (newname !== "" && newpass !== "") {
-        if (newpass in logins) {
-            talk("PassCode is already taken!Enter another Passcode")
-        } else {
-            talk("Profile Created successfully!")
-            logins[newpass] = [newname];
-            $("#passcode").val("");
-            $("#main, #signup").hide();
-            $("#login").fadeIn();
-        }
-    } else {
-        talk("Please Fill the fields")
-    }
-});
-
 $("#li").click(function () {
-    $("#digit1,#digit2,#digit3,#digit4").removeClass("border-danger animate__animated animate__headShake");
-    let digit1 = $("#digit1").val();
-    let digit2 = $("#digit2").val();
-    let digit3 = $("#digit3").val();
-    let digit4 = $("#digit4").val();
-    if (digit1 !== "" && digit2 !== "" && digit3 !== "" && digit4 !== "") {
-        let pass = digit1 + digit2 + digit3 + digit4
-        if (pass in logins) {
-            const name = logins[pass][0];
+    $("#name").removeClass("border-danger animate__animated animate__headShake");
+    let name = $("#name").val();
+    if (name !== "") {
             $("#main").fadeIn();
             $("#shell").addClass("shadow-2");
             $("#shell").removeClass("shadow-1");
             $("#login").hide();
-            talk("Welcome!" + name);
+            talk("Welcome!" + name+"!Command me!I am at your service");
             $("#username").text("Hey, " + name);
-            $("#input").text("Welcome " + name);
-        } else {
-            $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
-            $("#digit1,#digit2,#digit3,#digit4").val("");
-            talk("User Not found");
-        }
+            $("#output").text("Welcome " + name);
     } else {
-        $("#digit1,#digit2,#digit3,#digit4").addClass("border-danger animate__animated animate__headShake");
-        $("#digit1,#digit2,#digit3,#digit4").val("");
-        talk("Please Enter Passcode")
+        $("#name").addClass("border-danger animate__animated animate__headShake");
+        $("#name").val("");
+        talk("Please Enter Your name")
     }
 });
 $("#logout,#reload").click(function () {
-    $("#digit1,#digit2,#digit3,#digit4").val("")
-    $("#main,#signup").hide();
+    $("#name").val("")
+    $("#main").hide();
     $("#login").fadeIn();
-})
-
-$("#su").click(function () {
-    $("#main,#login").hide();
-    $("#signup").fadeIn();
 })
 
 function checkScreenResolution() {
@@ -183,19 +145,6 @@ function checkScreenResolution() {
     }
 }
 
-const digitInputs = document.querySelectorAll('.digit-input');
-
-digitInputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        if (input.value.length === 1) {
-            if (index < digitInputs.length - 1) {
-                digitInputs[index + 1].focus();
-            }
-        } else {
-            digitInputs[index - 1].focus();
-        }
-    });
-});
 
 
 
